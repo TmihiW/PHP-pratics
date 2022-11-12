@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>My PHP Website</title>
+  <title>Super Globals Page</title>
   <a href="00_main.php">|Main Page|</a><hr></hr>
   <a href="01_output.php">|Output Page|</a>
   <a href="02_variables.php">|Variables Page|</a>
