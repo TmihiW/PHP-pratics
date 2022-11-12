@@ -12,6 +12,7 @@
   <a href="06_functions.php">|Functions Page|</a>
   <a href="07_array_functions.php">|Array Functions Page|</a>
   <a href="08_string_functions.php">|String Functions Page|</a>
+  <a href="09_superglobals.php">|Super Globals Page|</a>
  
   <hr></hr>
 </head>
