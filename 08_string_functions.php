@@ -179,8 +179,6 @@ printf('1+1=%f',1+1);
 <br></br>
 <?php
 echo'output:<br>';
-echo'branch:<br>';
-echo'br1aaaaa';
 ?>
 <hr></hr>
 <br></br>
