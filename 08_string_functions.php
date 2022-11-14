@@ -1,9 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>String Functions Page</title>
-  <a href="00_main.php">|Main Page|</a><hr></hr>
+  <form action="00_main.php" method="post">     
+  <button >Main Page</button>   
+  </form>
+  <?php if(isset($_GET['prev'])){
+  $pr = $_GET['prev'];
+  echo "<a href='$pr'><button id='back'>Back</button></a>";
+}?>
+  <hr></hr>
+  <!--  
   <a href="01_output.php">|Output Page|</a>
   <a href="02_variables.php">|Variables Page|</a>
   <a href="03_arrays.php">|Arrays Page|</a>
@@ -13,6 +20,22 @@
   <a href="07_array_functions.php">|Array Functions Page|</a>
   <a href="08_string_functions.php">|String Functions Page|</a>
   <a href="09_superglobals.php">|Super Globals Page|</a>
+  <a href="10_get_post.php">|Get Post Page|</a>
+  <hr></hr>
+  -->  
+  <?php 
+   $a = $_SERVER['PHP_SELF'];
+   echo "<a href='01_output.php?prev=$a'>|Output Page| </a>";
+   echo "<a href='02_variables.php?prev=$a'>|Variables Page| </a>";
+   echo "<a href='03_arrays.php?prev=$a'>|Arrays Page| </a>";
+   echo "<a href='04_conditionals.php?prev=$a'>|Conditionals Page| </a>";
+   echo "<a href='05_loops.php?prev=$a'>|Loops Page| </a>";
+   echo "<a href='06_functions.php?prev=$a'>|Functions Page| </a>";
+   echo "<a href='07_array_functions.php?prev=$a'>|Array Functions Page| </a>";
+   echo "<a href='08_string_functions.php?prev=$a'>|String Functions Page| </a>";
+   echo "<a href='09_superglobals.php?prev=$a'>|Super Globals Page| </a>";
+   echo "<a href='10_get_post.php?prev=$a'>|Get Post Page| </a>";
+  ?>
   <hr></hr>
 </head>
 <body>
@@ -145,6 +168,7 @@ Alert: <input type="string" name="s1" /><br>
 <input type="submit" name="alert"value="Send">
 </form>
 <?php
+echo'<br>if(isset($_POST["alert"])){<br>    echo htmlspecialchars($s4);<br>}else{<br>    echo htmlspecialchars($s4);<br>}<br><br>';
 
 if(isset($_POST["alert"])){
     $s3='"';
@@ -153,7 +177,6 @@ if(isset($_POST["alert"])){
     $s4='<script>alert('."$s3".')</script>';
     echo $s4;
 };
-echo'<br>if(isset($_POST["alert"])){<br>    echo htmlspecialchars($s4);<br>}else{<br>    echo htmlspecialchars($s4);<br>}<br><br>';
 echo'<br>after:<br>';
 if(isset($_POST["alert"])){
     echo htmlspecialchars($s4);
@@ -190,9 +213,18 @@ echo'output:<br>';
 ?>
 <hr></hr>
 <br></br>
-<?php
-echo'output:<br>';
+<?Php 
+echo htmlspecialchars("<form action=\"09_superglobals.php\" method=\"post\">").'<br>'.htmlspecialchars("<input type=\"hidden\" name=\"message\" value=").'&lt?php echo $s3;?&gt><br>'.htmlspecialchars("<input type=\"input\" name=\"user\" value=\"from previous page\">").'<br>'.htmlspecialchars("<button type=\"submit\"name=\"sendMessage\">Next Page</button>").'<br>'.htmlspecialchars("</form>").'<br><br>';
+echo 'Output will be next page\'s end<br><br>';
 ?>
+
+<form action="09_superglobals.php" method="post">     
+    <input type="hidden" name="alertPrevious" value=<?php echo $s3;?>>
+    Message to next page: 
+    <input type="input" name="message" value="from previous page">
+    <button type="submit"name="sendMessage">Next Page</button>
+    <br><br>Also you can send alert from this page<br><br>
+</form>
 <hr></hr>
 <br></br>
 <?php
