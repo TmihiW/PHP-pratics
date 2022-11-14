@@ -25,6 +25,7 @@
   <a href="08_string_functions.php">|String Functions Page|</a>
   <a href="09_superglobals.php">|Super Globals Page|</a>
   <a href="10_get_post.php">|Get Post Page|</a>
+  <a href="11_sanitize_inputs.php">|Sanitize Inputs Page|</a>
   <hr></hr>
   -->  
   <?php 
@@ -39,6 +40,7 @@
    echo "<a href='08_string_functions.php?prev=$a'>|String Functions Page| </a>";
    echo "<a href='09_superglobals.php?prev=$a'>|Super Globals Page| </a>";
    echo "<a href='10_get_post.php?prev=$a'>|Get Post Page| </a>";
+   echo "<a href='11_sanitize_inputs.php?prev=$a'>|Sanitize Inputs Page| </a>";
   ?>
   <hr></hr>
 </head>
