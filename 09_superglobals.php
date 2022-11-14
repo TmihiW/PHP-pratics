@@ -45,7 +45,7 @@ if(isset($_POST["hide"])){
   $switch=0;  
   };
 $code=0;
-if(isset($_POST["code"])){
+  if(isset($_POST["code"])){
   $alert='<script>alert("<form method=\"post\">\n  <input type=\"submit\" name=\"show\"value=\"Show\">\n  <input type=\"submit\" name=\"hide\"value=\"Hide\">\n</form>  \n<?php\n$switch=0;\nif(isset($_POST[\"show\"])){\n    $switch=1;\n    if($switch==1){\n      var_dump($_SERVER);\n    } \n    };\n    if(isset($_POST[\"hide\"])){\n    $switch=0;  \n    };\n?> ") </script>';
   echo $alert;
 
