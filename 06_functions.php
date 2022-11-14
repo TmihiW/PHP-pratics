@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <title>Functions Page</title>
-  <form action="00_main.php" method="post">     
+  <form action="00_main.php" method="get">     
   <button >Main Page</button> 
   </form>
   <?php if(isset($_GET['prev'])){
@@ -12,32 +12,38 @@
 }?>
   <hr></hr>
   <!--  
-  <a href="01_output.php">|Output Page|</a>
-  <a href="02_variables.php">|Variables Page|</a>
-  <a href="03_arrays.php">|Arrays Page|</a>
-  <a href="04_conditionals.php">|Conditionals Page|</a>
-  <a href="05_loops.php">|Loops Page|</a>
-  <a href="06_functions.php">|Functions Page|</a>
-  <a href="07_array_functions.php">|Array Functions Page|</a>
-  <a href="08_string_functions.php">|String Functions Page|</a>
-  <a href="09_superglobals.php">|Super Globals Page|</a>
-  <a href="10_get_post.php">|Get Post Page|</a>
-  <a href="11_sanitize_inputs.php">|Sanitize Inputs Page|</a>
+  <a href="01_output.php">|Output|</a>
+  <a href="02_variables.php">|Variables|</a>
+  <a href="03_arrays.php">|Arrays|</a>
+  <a href="04_conditionals.php">|Conditionals|</a>
+  <a href="05_loops.php">|Loops|</a>
+  <a href="06_functions.php">|Functions|</a>
+  <a href="07_array_functions.php">|Array Functions|</a>
+  <a href="08_string_functions.php">|String Functions|</a>
+  <a href="09_superglobals.php">|Super Globals|</a>
+  <a href="10_get_post.php">|Get Post|</a>
+  <a href="11_sanitize_inputs.php">|Sanitize Inputs|</a>
+  <a href="12_cookies.php">|Cookies|</a>
+  <a href="13_sessions.php">|Sessions|</a>
+  <a href="14_file_handling.php">|File Handling|</a>
   <hr></hr>
-  -->  
+  -->    
   <?php 
    $a = $_SERVER['PHP_SELF'];
-   echo "<a href='01_output.php?prev=$a'>|Output Page| </a>";
-   echo "<a href='02_variables.php?prev=$a'>|Variables Page| </a>";
-   echo "<a href='03_arrays.php?prev=$a'>|Arrays Page| </a>";
-   echo "<a href='04_conditionals.php?prev=$a'>|Conditionals Page| </a>";
-   echo "<a href='05_loops.php?prev=$a'>|Loops Page| </a>";
-   echo "<a href='06_functions.php?prev=$a'>|Functions Page| </a>";
-   echo "<a href='07_array_functions.php?prev=$a'>|Array Functions Page| </a>";
-   echo "<a href='08_string_functions.php?prev=$a'>|String Functions Page| </a>";
-   echo "<a href='09_superglobals.php?prev=$a'>|Super Globals Page| </a>";
-   echo "<a href='10_get_post.php?prev=$a'>|Get Post Page| </a>";
-   echo "<a href='11_sanitize_inputs.php?prev=$a'>|Sanitize Inputs Page| </a>";
+   echo "<a href='01_output.php?prev=$a'>|Output| </a>";
+   echo "<a href='02_variables.php?prev=$a'>|Variables| </a>";
+   echo "<a href='03_arrays.php?prev=$a'>|Arrays| </a>";
+   echo "<a href='04_conditionals.php?prev=$a'>|Conditionals| </a>";
+   echo "<a href='05_loops.php?prev=$a'>|Loops| </a>";
+   echo "<a href='06_functions.php?prev=$a'>|Functions| </a>";
+   echo "<a href='07_array_functions.php?prev=$a'>|Array Functions| </a>";
+   echo "<a href='08_string_functions.php?prev=$a'>|String Functions| </a>";
+   echo "<a href='09_superglobals.php?prev=$a'>|Super Globals| </a>";
+   echo "<a href='10_get_post.php?prev=$a'>|Get Post| </a>";
+   echo "<a href='11_sanitize_inputs.php?prev=$a'>|Sanitize Inputs| </a>";
+   echo "<a href='12_cookies.php?prev=$a'>|Cookies| </a>";
+   echo "<a href='13_sessions.php?prev=$a'>|Sessions| </a>";   
+   echo "<a href='14_file_handling.php?prev=$a'>|File Handling| </a>";   
   ?>
   <hr></hr>
 </head>
@@ -98,7 +104,8 @@ registerEmail($email);
 echo'function sum($n1,$n2){<br>    return $n1+$n2;<br>}<br>echo sum(1,2);<br><br>';
 echo'output:<br>';
 function sum($n1,$n2){
-    return $n1+$n2;
+    if(is_numeric($n1) && is_numeric($n2)){
+        return $n1+$n2;}
 }
 echo sum(1,2).'<br>';
 echo '1 + 2  = '.sum(1,2) .'<br>';
@@ -132,7 +139,8 @@ if(isset($_POST["add"])){
 echo'$sub = function ($r1,$r2){<br>    return $r1-$r2;<br>};<br>echo \'sub is: \'.$sub($p1,$p2);<br><br>';
 echo'output:<br>';
 $sub = function ($r1,$r2){
-    return $r1-$r2;
+    if(is_numeric($r1) && is_numeric($r2)){
+        return $r1-$r2;}
 };
 if(isset($_POST["add"])){
 echo 'sub is: '.$sub($p1,$p2);
@@ -144,7 +152,11 @@ echo 'sub is: '.$sub($p1,$p2);
 <?php
 echo'$mul = fn($m1,$m2)=>$m1*$m2;<br>echo \'mul is: \'.$mul($p1,$p2);<br><br>';
 echo'output:<br>';
-$mul = fn($m1,$m2)=>$m1*$m2;
+//$mul = fn($m1,$m2)=>$m1*$m2;
+$mul = function ($m1,$m2){
+    if(is_numeric($m1) && is_numeric($m2)){
+        return $m1*$m2;}
+};
 if(isset($_POST["add"])){
 echo 'mul is: '.$mul($p1,$p2);
 };

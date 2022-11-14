@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Get Post Page</title>
+  <title>Sanitize Inputs Page</title>
   <form action="00_main.php" method="post">     
   <button >Main Page</button>   
   </form>
@@ -11,7 +11,7 @@
   echo "<a href='$pr'><button id='back'>Back</button></a>";
 }?>
   <hr></hr>
- <!--  
+   <!--  
   <a href="01_output.php">|Output|</a>
   <a href="02_variables.php">|Variables|</a>
   <a href="03_arrays.php">|Arrays|</a>
@@ -47,102 +47,71 @@
   ?>
 </head> 
 <body>
-<?php
 
-?>
 <hr></hr>
 <br></br>
-
-<a href="<?php echo $_SERVER['PHP_SELF'];?>?name=Kadir">Click </a>
 <?php
-echo'<br>output:<br>';
-if(isset($_GET['name'])){
-  $name = $_GET['name'];
-  echo $name;
-}
+echo'<br>code:<br>';
+echo'if(isset($_POST[\'submit\'])){  <br>    $name = htmlspecialchars($_POST[\'name\']);  //covering with htmlspecialchars<br>    $sirname=filter_input(INPUT_POST,\'sirname\',FILTER_SANITIZE_SPECIAL_CHARS); //covering with filter_input **[prefered]**<br>    $email=filter_var($_POST[\'email\'],FILTER_SANITIZE_EMAIL); //covering with filter_var<br>    $age = filter_input(INPUT_POST,\'age\',FILTER_SANITIZE_NUMBER_INT); //covering with filter_input<br>    echo\'<br>\';<br>    if(!empty($name) && !empty($age)){<br>      echo \"Your name is $name $sirname and you are $age years old\";<br>      echo \"<br> $email\";<br>    }<br>    else{<br>      echo \'Please fill the blanks...\';<br>    }  <br>  }';
 ?>
-<hr></hr>
 <br></br>
-<form method="post"> 
-<input type="submit" name="code"value="Code">
-</form>
-<?php
-if(isset($_POST["code"])){
-    $alert='<script>alert("<a href=\"<?php echo $_SERVER[\'PHP_SELF\'];?>?a=1&b=2&c=3\">Try1 </a>   \|\n    <a href=\"<?php echo $_SERVER[\'PHP_SELF\'];?>?a=3&b=2&c=1\">Try2 </a>   \|\n    <a href=\"<?php echo $_SERVER[\'PHP_SELF\'];?>?a=3&b=3&c=3\">Try3 </a>   \|\n<?php\n    echo\'<br>output:<br>\';\n    if(isset($_GET[\'a\'])){\n        if($_GET[\'a\']==\"3\" && $_GET[\'b\']==\"3\" && $_GET[\'c\']==\"3\"){\n            echo \"Well Done\";\n          }\n            else{\n                echo \"Try Again\";\n            }\n    }\n?>")</script>';
-    echo $alert;
-    //echo '&lt?php ?&gt';
-    };
-?>
-<a href="<?php echo $_SERVER['PHP_SELF'];?>?a=1&b=2&c=3">Try1 </a>   |
-<a href="<?php echo $_SERVER['PHP_SELF'];?>?a=3&b=2&c=1">Try2 </a>   |
-<a href="<?php echo $_SERVER['PHP_SELF'];?>?a=3&b=3&c=3">Try3 </a>   |
-<?php
-echo'<br>output:<br>';
-if(isset($_GET['a'])){
-    if($_GET['a']=="3" && $_GET['b']=="3" && $_GET['c']=="3"){
-        echo "Well Done";
-      }
-        else{
-            echo "Try Again";
-        }
-}
-?>
-<hr></hr>
-<br></br>
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="GET">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST"><!--covering with htmlspecialchars-->
   <div>
     <label for="name">Name:</label>
     <input type="text" name="name">
   </div>
   <div>
+    <label for="sirname">Sirname:</label>
+    <input type="text" name="sirname">
+  </div>
+  <div>
     <label for="age">Age:</label>
     <input type="text" name="age">
   </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="text" name="email">
+  </div>
   <input type="submit" name="submit" value="Enter">
 </form>
-<?php
-echo'if you are not submit data then use GET form<br>';
+<?php 
 echo'<br>output:<br>';
-if(isset($_GET['submit'])){
-  echo var_dump($_GET);
-  $name = $_GET['name'];
-  $age = $_GET['age'];
-  echo '<br>';
-  echo "Your name is $name and you are $age years old";
-}
-
+echo 'Type  '.htmlspecialchars("<script>alert(\"Hello\")</script>"). 'in the name and age field then click enter';
+if(isset($_POST['submit'])){  
+    $name = htmlspecialchars($_POST['name']);  //covering with htmlspecialchars
+    $sirname=filter_input(INPUT_POST,'sirname',FILTER_SANITIZE_SPECIAL_CHARS); //covering with filter_input **[prefered]**
+    $email=filter_var($_POST['email'],FILTER_SANITIZE_EMAIL); //covering with filter_var
+    $age = filter_input(INPUT_POST,'age',FILTER_SANITIZE_NUMBER_INT); //covering with filter_input
+    echo'<br>';
+    if(!empty($name) && !empty($age)){
+      echo "Your name is $name $sirname and you are $age years old";
+      echo "<br> $email";
+    }
+    else{
+      echo 'Please fill the blanks...';
+    }  
+  }
 ?>
 <hr></hr>
 <br></br>
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-  <div>
-    <label for="name2">Name:</label>
-    <input type="text" name="name2">
-  </div>
-  <div>
-    <label for="age2">Age:</label>
-    <input type="text" name="age2">
-  </div>
-  <input type="submit" name="submit2" value="Enter">
-</form>
 <?php
 echo'<br>output:<br>';
 
 
-if(isset($_POST['submit2'])){
-  echo var_dump($_POST);
-  $name2 = $_POST['name2'];
-  $age2 = $_POST['age2'];
-  echo'<br>';
-  echo "Your name is $name2 and you are $age2 years old";
-}
-
 ?>
-
 <hr></hr>
 <br></br>
 <?php
-echo'output:<br>';
+echo'<br>output:<br>';
+
+
+?>
+<hr></hr>
+<br></br>
+<?php
+echo'<br>output:<br>';
+
+
 ?>
 <hr></hr>
 <br></br>
