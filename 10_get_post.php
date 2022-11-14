@@ -22,6 +22,7 @@
   <a href="08_string_functions.php">|String Functions Page|</a>
   <a href="09_superglobals.php">|Super Globals Page|</a>
   <a href="10_get_post.php">|Get Post Page|</a>
+  <a href="11_sanitize_inputs.php">|Sanitize Inputs Page|</a>
   <hr></hr>
   -->  
   <?php 
@@ -36,6 +37,7 @@
    echo "<a href='08_string_functions.php?prev=$a'>|String Functions Page| </a>";
    echo "<a href='09_superglobals.php?prev=$a'>|Super Globals Page| </a>";
    echo "<a href='10_get_post.php?prev=$a'>|Get Post Page| </a>";
+   echo "<a href='11_sanitize_inputs.php?prev=$a'>|Sanitize Inputs Page| </a>";
   ?>
 </head> 
 <body>
@@ -86,16 +88,51 @@ if(isset($_GET['a'])){
 ?>
 <hr></hr>
 <br></br>
-<form method="post">
-  
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="GET">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" name="name">
+  </div>
+  <div>
+    <label for="age">Age:</label>
+    <input type="text" name="age">
+  </div>
+  <input type="submit" name="submit" value="Enter">
 </form>
 <?php
-echo'output:<br>';
+echo'if you are not submit data then use GET form<br>';
+echo'<br>output:<br>';
+if(isset($_GET['submit'])){
+  echo var_dump($_GET);
+  $name = $_GET['name'];
+  $age = $_GET['age'];
+  echo '<br>';
+  echo "Your name is $name and you are $age years old";
+}
+
 ?>
 <hr></hr>
 <br></br>
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+  <div>
+    <label for="name2">Name:</label>
+    <input type="text" name="name2">
+  </div>
+  <div>
+    <label for="age2">Age:</label>
+    <input type="text" name="age2">
+  </div>
+  <input type="submit" name="submit2" value="Enter">
+</form>
 <?php
-echo'output:<br>';
+echo'<br>output:<br>';
+if(isset($_POST['submit2'])){
+  echo var_dump($_POST);
+  $name2 = $_POST['name2'];
+  $age2 = $_POST['age2'];
+  echo'<br>';
+  echo "Your name is $name2 and you are $age2 years old";
+}
 ?>
 <hr></hr>
 <br></br>
