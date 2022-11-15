@@ -5,7 +5,12 @@
   <form action="00_main.php" method="post">     
   <button >Main Page</button>   
   </form>  
-  <?php if(isset($_GET['prev'])){
+  <?php
+
+use function PHPUnit\Framework\arrayHasKey;
+use function PHPUnit\Framework\isNull;
+
+ if(isset($_GET['prev'])){
   $pr = $_GET['prev'];
   echo "<a href='$pr'><button id='back'>Back</button></a>";
 }?>
@@ -59,7 +64,7 @@ var_dump($_POST);
 echo'var_dump($_SERVER);';
 ?>
   <br></br>
-<form method="post"> 
+<form method="POST"> 
 <input type="submit" name="show"value="Show">
 <input type="submit" name="hide"value="Hide">
 <input type="submit" name="code"value="Code">
@@ -83,26 +88,41 @@ echo'output:<br>';
 echo'For better list:';
 ?>
 <br></br>
-<form method="post"> 
+<form method="POST"> 
 <input type="submit" name="show2"value="Show">
 <input type="submit" name="hide2"value="Hide">
 <input type="submit" name="code2"value="Code">
+<input type="submit" name="delsh2"value="DelSh">
+<input type="submit" name="reset2"value="Reset">
 </form>
+
 <?php
-
-echo'output:<br>';
- $s=0;
-if(isset($_POST["show2"])){
-  $s=1;  
+ session_start(); 
+ echo'<br>Before: <br>';
+ echo var_dump($_SESSION).'<br>';
+if(isset($_POST["show2"])){      
+  $_SESSION["sh"] =1;
+  echo'<br>'.$_SESSION["sh"].'<br>';  
   };
-
+if(isset($_POST["hide2"])){
+  $_SESSION["sh"] =0;  
+  echo'<br>'.$_SESSION["sh"].'<br>';  
+  };
 if(isset($_POST["code2"])){
   $alert2='<script>alert("\n<ul>\n<li>Host:<?php echo $_SERVER[\'HTTP_HOST\'];?></li>\n<li>Doc Root:<?php echo $_SERVER[\'DOCUMENT_ROOT\'];?></li>\n<li>Server Name:<?php echo $_SERVER[\'SERVER_NAME\'];?></li>\n<li>Server Port:<?php echo $_SERVER[\'SERVER_PORT\'];?></li>\n<li>Current File Dir:<?php echo $_SERVER[\'PHP_SELF\'];?></li>\n<li>Request URI:<?php echo $_SERVER[\'REQUEST_URI\'];?></li>\n<li>Sv Software:<?php echo $_SERVER[\'SERVER_SOFTWARE\'];?></li>\n<li>Client Info:<?php echo $_SERVER[\'HTTP_USER_AGENT\'];?></li>\n<li>Remote Address:<?php echo $_SERVER[\'REMOTE_ADDR\'];?></li>\n<li>Remote Port:<?php echo $_SERVER[\'REMOTE_PORT\'];?></li>\n</ul>") </script>';
   echo $alert2;
 }
-echo '<br>'.$s;
+if(isset($_POST["delsh2"])){
+  unset($_SESSION["sh"]);
+   echo'<br>'.var_dump($_SESSION).'<br>';
+  };  
+if(isset($_POST["reset2"])){
+    session_unset();  
+  };
+  echo'<br> After: <br>';
+  echo var_dump($_SESSION).'<br>';
 ?>
-<?php if ($s==1):?>   
+<?php if (array_key_exists("sh",$_SESSION)&&$_SESSION["sh"]==1):?>   
 <ul>
 <li>Host:<?php echo $_SERVER['HTTP_HOST'];?></li>
 <li>Doc. Root:<?php echo $_SERVER['DOCUMENT_ROOT'];?></li>
@@ -115,20 +135,33 @@ echo '<br>'.$s;
 <li>Remote Address:<?php echo $_SERVER['REMOTE_ADDR'];?></li>
 <li>Remote Port:<?php echo $_SERVER['REMOTE_PORT'];?></li>
 </ul>
-<?php elseif($s==0):?>
+<?php elseif(array_key_exists("sh",$_SESSION)&&$_SESSION["sh"]==0):?>
   <h3>...</h3>  
 <?php endif;?>
 <hr></hr>
 <br></br>
-<?php
-echo'output:<br>';
 
-?>
-<hr></hr>
-<br></br>
+<form method="POST"> 
+To Show Code :
+<input type="submit" name="show3"value="Show Code">
+To Hide Code :
+<input type="submit" name="hide3"value="Hide Code">
+</form>
 <?php
-echo'output:<br>';
-?>
+ echo'<br>'.var_dump($_SESSION).'<br>';
+if(isset($_POST["show3"])){      
+  $_SESSION["sc"] =1;  
+  echo'<br>'.var_dump($_SESSION).'<br><hr>';  
+  };
+if(isset($_POST["hide3"])){
+  $_SESSION["sc"] =0;  
+  echo'<br>'.var_dump($_SESSION).'<br>';  
+  };
+  ?>
+ <?php if(array_key_exists("sc",$_SESSION)and$_SESSION["sc"]==1):?><?php    echo'<?php<br> session_start(); <br>if(isset($_POST["show2"])){      <br>  $_SESSION["sh"] =1;<br>  };<br>if(isset($_POST["hide2"])){<br>  $_SESSION["sh"] =0;  <br>  };<br>if(isset($_POST["code2"])){<br> echo $alert2;<br>}<br>if(isset($_POST["delsh2"])){<br>  unset($_SESSION["sh"]);<br>  };  <br>  if(isset($_POST["reset2"])){<br>    session_unset();  <br>  };<br>?>';  ?>
+ <?php elseif(array_key_exists("sc",$_SESSION)and$_SESSION["sc"]==0):?><?php echo 'dont show code<br>'; ?>
+ <?php endif;?>
+
 <hr></hr>
 <br></br>
 <?php

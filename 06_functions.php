@@ -76,6 +76,7 @@ echo 'Newest y = '.$y;
 <?php
 echo'function outSource2(){<br>    global $y;<br>    echo \' Old y =  \'.$y .\'br>\';<br>    $y=4;<br>    echo \'New y = \'.$y.\'br>\';<br>}<br>$y=2;<br>echo \'Oldest y = \'.$y.\'br>\';<br>outSource2();<br>echo \'Newest y = \'.$y;<br><br>';
 echo'output:<br>';
+
 function outSource2(){
     global $y;
     echo ' Old y =  '.$y .'<br>';
