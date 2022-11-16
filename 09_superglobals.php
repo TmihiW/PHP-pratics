@@ -7,8 +7,6 @@
   </form>  
   <?php
 
-use function PHPUnit\Framework\arrayHasKey;
-use function PHPUnit\Framework\isNull;
 
  if(isset($_GET['prev'])){
   $pr = $_GET['prev'];
