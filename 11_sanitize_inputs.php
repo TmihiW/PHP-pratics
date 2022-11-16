@@ -52,9 +52,9 @@
 <br></br>
 <?php
 echo'<br>code:<br>';
-echo'if(isset($_POST[\'submit\'])){  <br>    $name = htmlspecialchars($_POST[\'name\']);  //covering with htmlspecialchars<br>    $sirname=filter_input(INPUT_POST,\'sirname\',FILTER_SANITIZE_SPECIAL_CHARS); //covering with filter_input **[prefered]**<br>    $email=filter_var($_POST[\'email\'],FILTER_SANITIZE_EMAIL); //covering with filter_var<br>    $age = filter_input(INPUT_POST,\'age\',FILTER_SANITIZE_NUMBER_INT); //covering with filter_input<br>    echo\'<br>\';<br>    if(!empty($name) && !empty($age)){<br>      echo \"Your name is $name $sirname and you are $age years old\";<br>      echo \"<br> $email\";<br>    }<br>    else{<br>      echo \'Please fill the blanks...\';<br>    }  <br>  }';
+echo'if(isset($_POST[\'submit\'])){  <br>    $name = htmlspecialchars($_POST[\'name\']);  //covering with htmlspecialchars<br>    $sirname=filter_input(INPUT_POST,\'sirname\',FILTER_SANITIZE_SPECIAL_CHARS); //covering with filter_input **[prefered]**<br>    $email=filter_var($_POST[\'email\'],FILTER_SANITIZE_EMAIL); //covering with filter_var<br>    $age = filter_input(INPUT_POST,\'age\',FILTER_SANITIZE_NUMBER_INT); //covering with filter_input<br>    echo "&ltbr>";<br>    if(!empty($name) && !empty($age)){<br>      echo "Your name is $name $sirname and you are $age years old";<br>      echo "&ltbr> $email";<br>    }<br>    else{<br>      echo \'Please fill the blanks...\';<br>    }  <br>  }';
 ?>
-<br></br>
+<br></br><!--submit file itself can be another like action.php-->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST"><!--covering with htmlspecialchars-->
   <div>
     <label for="name">Name:</label>
