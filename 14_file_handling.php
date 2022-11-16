@@ -1,69 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>File Handling Page</title>
-  <form action="00_main.php" method="post">     
-  <button >Main Page</button> 
-  </form>
-  <?php if(isset($_GET['prev'])){
-  $pr = $_GET['prev'];
-  echo "<a href='$pr'><button id='back'>Back</button></a>";
-}?>
-
-  <hr></hr>
-  <!--  
-  <a href="01_output.php">|Output|</a>
-  <a href="02_variables.php">|Variables|</a>
-  <a href="03_arrays.php">|Arrays|</a>
-  <a href="04_conditionals.php">|Conditionals|</a>
-  <a href="05_loops.php">|Loops|</a>
-  <a href="06_functions.php">|Functions|</a>
-  <a href="07_array_functions.php">|Array Functions|</a>
-  <a href="08_string_functions.php">|String Functions|</a>
-  <a href="09_superglobals.php">|Super Globals|</a>
-  <a href="10_get_post.php">|Get Post|</a>
-  <a href="11_sanitize_inputs.php">|Sanitize Inputs|</a>
-  <a href="12_cookies.php">|Cookies|</a>
-  <a href="13_sessions.php">|Sessions|</a>
-  <a href="14_file_handling.php">|File Handling|</a>
-  <hr></hr>
-  -->    
-  <?php 
-   $a = $_SERVER['PHP_SELF'];
-   echo "<a href='01_output.php?prev=$a'>|Output| </a>";
-   echo "<a href='02_variables.php?prev=$a'>|Variables| </a>";
-   echo "<a href='03_arrays.php?prev=$a'>|Arrays| </a>";
-   echo "<a href='04_conditionals.php?prev=$a'>|Conditionals| </a>";
-   echo "<a href='05_loops.php?prev=$a'>|Loops| </a>";
-   echo "<a href='06_functions.php?prev=$a'>|Functions| </a>";
-   echo "<a href='07_array_functions.php?prev=$a'>|Array Functions| </a>";
-   echo "<a href='08_string_functions.php?prev=$a'>|String Functions| </a>";
-   echo "<a href='09_superglobals.php?prev=$a'>|Super Globals| </a>";
-   echo "<a href='10_get_post.php?prev=$a'>|Get Post| </a>";
-   echo "<a href='11_sanitize_inputs.php?prev=$a'>|Sanitize Inputs| </a>";
-   echo "<a href='12_cookies.php?prev=$a'>|Cookies| </a>";
-   echo "<a href='13_sessions.php?prev=$a'>|Sessions| </a>";   
-   echo "<a href='14_file_handling.php?prev=$a'>|File Handling| </a>";   
-  ?>
-  <hr></hr>
-</head>
+<?php include 'inc/header.php'; ?>
+<title>File Handling Page</title>
 <body>
 <br></br>
 <?php
 echo'output:<br>';
-?>
-<hr></hr>
-<br></br>
-<?php
-echo'output:<br>';
-?>
-<hr></hr>
-<br></br>
-<?php
-echo'output:<br>';
-?>
-<hr></hr>
-<br></br>
+$file='extras/users.txt';
+if(file_exists($file)){
+  echo readfile($file);
+  echo'<br><br>';
+  echo file_get_contents($file);
+  echo'<br>';
+}
 
+?>
+<hr></hr>
+<br></br>
+<?php
+echo'output:<br>';
+$file='extras/users.txt';
+if(file_exists($file)){
+  $handle = fopen($file,'r');
+  $data = fread($handle,filesize($file));
+  echo $data;
+  fclose($handle);}
+  else{
+  $handle1 = fopen($file,'w');
+  $contents='Kadir'.'|'.'Ahmet'.'|';
+  fwrite($handle1,$contents);  
+  fclose($handle1);
+  }
+  
+?>
+<hr></hr>
+<br></br>
+<form  method="post">
+  <input type="text" name="name" placeholder="Enter Name">
+  <input type="text" name="email" placeholder="Enter Email">
+  <button type="submit" name="submit">Submit</button>
+  <button type="submit" name="show">Show</button>
+</form>
+<?php
+echo'<br>output:<br>';
+$file2='extras/mails.txt';
+$handle2=fopen($file2, 'a+');
+if(isset($_POST['submit'])){
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  if(!empty($name) && !empty($email)){
+    $contents2 = $name.PHP_EOL.$email.PHP_EOL;
+    fwrite($handle2, $contents2);
+    fclose($handle2);    
+    $name='';
+    $email='';
+  }
+
+}
+if(isset($_POST['show'])){
+  $handle3=fopen($file2, 'r');
+  $data2=fread($handle3, filesize($file2));
+  echo $data2;
+  fclose($handle3);
+}
+?>
+<hr></hr>
+<br></br>
+<?php
+echo'output:<br>';
+?>
+<hr></hr>
+<br></br>
+<?php
+echo'output:<br>';
+?>
+<hr></hr>
+<br></br>
+<?php
+echo'output:<br>';
+?>
+<hr></hr>
+<br></br>
 </body>
 </html>
