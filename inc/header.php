@@ -1,3 +1,4 @@
+<?php include'config/database.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +28,8 @@
   <a href="15_file_upload.php">|File Upload|</a>
   <a href="16_exceptions.php">|Exceptions|</a>
   <a href="17_oop.php">|OOP|</a>
+  <a href="http://localhost/phpmyadmin/">|phpMyAdmin|</a>
+  <a href="18_feedback.php">|Feedback|</a>
   <hr></hr>
   -->    
   <?php 
@@ -48,6 +51,8 @@
    echo "<a href='15_file_upload.php?prev=$a'>|File Upload| </a>";
    echo "<a href='16_exceptions.php?prev=$a'>|Exceptions| </a>";
    echo "<a href='17_oop.php?prev=$a'>|OOP| </a>";
+   echo "<a href='http://localhost/phpmyadmin/'>|phpMyAdmin| </a>";
+   echo "<a href='18_feedback.php?prev=$a'>|Feedback| </a>";
   ?>
   <hr></hr>
 </head>
