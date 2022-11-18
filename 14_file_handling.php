@@ -40,12 +40,19 @@ if(file_exists($file)){
   <button type="submit" name="show">Show</button>
 </form>
 <?php
+//protection from XSS (Cross Site Scripting)
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 echo'<br>output:<br>';
 $file2='extras/mails.txt';
 $handle2=fopen($file2, 'a+');
 if(isset($_POST['submit'])){
-  $name = $_POST['name'];
-  $email = $_POST['email'];
+  $name = test_input($_POST["name"]);
+  $email = test_input($_POST["email"]);
   if(!empty($name) && !empty($email)){
     $contents2 = $name.PHP_EOL.$email.PHP_EOL;
     fwrite($handle2, $contents2);
