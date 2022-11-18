@@ -42,8 +42,14 @@ if(isset($_POST['submit'])){
     // validate name
     if(empty($_POST['nameF'])){
         $nameErr='Name is required';
-    }else{
-        $name=filter_input(INPUT_POST, 'nameF',FILTER_SANITIZE_SPECIAL_CHARS);
+    }
+    else{
+        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+            $nameErr = "Only letters and white space allowed";
+          }
+          else{
+            $name=filter_input(INPUT_POST, 'nameF',FILTER_SANITIZE_SPECIAL_CHARS);
+          }
     }
     // validate email
     if(empty($_POST['emailF'])){
