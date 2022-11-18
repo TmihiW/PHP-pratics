@@ -12,7 +12,36 @@ var_dump($_POST);
 <?php
 echo'var_dump($_SERVER);';
 ?>
-  <br></br>
+<hr></hr>
+<br></br>
+<?php
+echo"<pre>";
+echo'var_dump($_SERVER);';
+echo"</pre>";
+?>
+<hr></hr>
+<br></br>
+<br></br>
+<form method="POST"> 
+<input type="text" name="sg">
+<input type="submit" name="dd"value="DumpDie">
+</form>
+<?php
+function dumpdie($v){
+  echo"<pre>";
+  var_dump($v);
+  echo"</pre>";
+  die();
+}
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["dd"])){
+  $superglobal = htmlspecialchars($_POST['sg']);
+  dd($superglobal);
+};
+echo'output:<br>';
+//die();
+?>
+<hr></hr>
+<br></br>
 <form method="POST"> 
 <input type="submit" name="show"value="Show">
 <input type="submit" name="hide"value="Hide">
