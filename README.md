@@ -1,10 +1,10 @@
 
 download xampp
-_
+<br>
 launch apache and mysql
-_
+<br>
 enter http://localhost/phpmyadmin
-_
+<br>
 configure db username and pw on config/database.php
-_
+<br>
 create db like php_dev
